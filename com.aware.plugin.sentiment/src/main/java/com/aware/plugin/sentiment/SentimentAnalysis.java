@@ -1,4 +1,4 @@
-package com.aware.plugin.sentimental;
+package com.aware.plugin.sentiment;
 
 import android.content.Context;
 import android.util.Log;

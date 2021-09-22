@@ -1,4 +1,4 @@
-package com.aware.plugin.sentimental
+package com.aware.plugin.sentiment
 
 import android.app.Service
 import android.content.*
@@ -69,10 +69,10 @@ open class Plugin : Aware_Plugin() {
 
             DEBUG = Aware.getSetting(this, Aware_Preferences.DEBUG_FLAG).equals("true")
 
-            if (Aware.getSetting(applicationContext, Settings.STATUS_PLUGIN_SENTIMENTAL).isEmpty()) {
-                Aware.setSetting(applicationContext, Settings.STATUS_PLUGIN_SENTIMENTAL, true)
+            if (Aware.getSetting(applicationContext, Settings.STATUS_PLUGIN_SENTIMENT).isEmpty()) {
+                Aware.setSetting(applicationContext, Settings.STATUS_PLUGIN_SENTIMENT, true)
             } else {
-                if (Aware.getSetting(applicationContext, Settings.STATUS_PLUGIN_SENTIMENTAL).equals("false", ignoreCase = true)) {
+                if (Aware.getSetting(applicationContext, Settings.STATUS_PLUGIN_SENTIMENT).equals("false", ignoreCase = true)) {
                     Aware.stopPlugin(applicationContext, packageName)
                     return Service.START_STICKY
                 }
@@ -102,9 +102,9 @@ open class Plugin : Aware_Plugin() {
 
                         var packagesOfInterest: List<String> = listOf()
                         var flag = 0;
-                        if (Aware.getSetting(applicationContext, Settings.PLUGIN_SENTIMENTAL_PACKAGES).isNotBlank()) {
+                        if (Aware.getSetting(applicationContext, Settings.PLUGIN_SENTIMENT_PACKAGES).isNotBlank()) {
                             Log.i("ABTest", "Plugin packages is not blank ");
-                            packagesOfInterest = Aware.getSetting(applicationContext, Settings.PLUGIN_SENTIMENTAL_PACKAGES).split(",")
+                            packagesOfInterest = Aware.getSetting(applicationContext, Settings.PLUGIN_SENTIMENT_PACKAGES).split(",")
                             if (packagesOfInterest.contains(data!!.getAsString(Keyboard_Provider.Keyboard_Data.PACKAGE_NAME))) {
                                 flag = 1;
                             }
@@ -211,7 +211,7 @@ open class Plugin : Aware_Plugin() {
     override fun onDestroy() {
         super.onDestroy()
         Aware.setSetting(this, Aware_Preferences.STATUS_APPLICATIONS, false)
-        Aware.setSetting(this, Settings.STATUS_PLUGIN_SENTIMENTAL, false)
+        Aware.setSetting(this, Settings.STATUS_PLUGIN_SENTIMENT, false)
         Aware.stopKeyboard(this)
 
         ContentResolver.setSyncAutomatically(Aware.getAWAREAccount(this), Provider.getAuthority(this), false);
