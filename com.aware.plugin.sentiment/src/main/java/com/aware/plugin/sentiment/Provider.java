@@ -1,4 +1,4 @@
-package com.aware.plugin.sentimental;
+package com.aware.plugin.sentiment;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -23,17 +23,17 @@ public class Provider extends ContentProvider {
     public static final int DATABASE_VERSION = 4;
 
     /**
-     * Provider authority: com.aware.plugin.sentimental.provider.sentimental
+     * Provider authority: com.aware.plugin.sentiment.provider.sentiment
      */
-    public static String AUTHORITY = "com.aware.plugin.sentimental.provider.sentimental";
+    public static String AUTHORITY = "com.aware.plugin.sentiment.provider.sentiment";
 
     private static final int SENTIMENTAL = 1;
     private static final int SENTIMENTAL_ID = 2;
 
-    public static final String DATABASE_NAME = "plugin_sentimental.db";
+    public static final String DATABASE_NAME = "plugin_sentiment.db";
 
     public static final String[] DATABASE_TABLES = {
-            "plugin_sentimental"
+            "plugin_sentiment"
     };
 
     public static final String[] TABLES_FIELDS = {
@@ -51,9 +51,9 @@ public class Provider extends ContentProvider {
 
         ;
 
-        public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/plugin_sentimental");
-        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.aware.plugin.sentimental";
-        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.aware.plugin.sentimental";
+        public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/plugin_sentiment");
+        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.aware.plugin.sentiment";
+        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.aware.plugin.sentiment";
 
         public static final String _ID = "_id";
         public static final String TIMESTAMP = "timestamp";
@@ -72,13 +72,13 @@ public class Provider extends ContentProvider {
      * @return
      */
     public static String getAuthority(Context context) {
-        AUTHORITY = context.getPackageName() + ".provider.sentimental";
+        AUTHORITY = context.getPackageName() + ".provider.sentiment";
         return AUTHORITY;
     }
 
     @Override
     public boolean onCreate() {
-        AUTHORITY = getContext().getPackageName() + ".provider.sentimental";
+        AUTHORITY = getContext().getPackageName() + ".provider.sentiment";
 
         URIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         URIMatcher.addURI(AUTHORITY, DATABASE_TABLES[0], SENTIMENTAL);
