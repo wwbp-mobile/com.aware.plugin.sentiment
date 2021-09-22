@@ -9,6 +9,12 @@ Lexica are dictionaries associating words with categories; word-category associa
 
 This plugin captures user keyboard input and applies standard lexica to the text. Input can be captured from specific apps, such as WhatsApp or the Android messaging app, or it can be captured universally.
 
+# Compilation
+
+This is a plugin, not a stand-alone module and requires the main aware client to compile.  
+If you clone the repository in wwbp/aware-client (https://github.com/wwbp/aware_client) this submodule will come with it.
+Please see the compilation and apk construction instructions there.
+
 # Settings
 
 Parameters adjustable on the dashboard and client:
