@@ -1,7 +1,7 @@
 AWARE Plugin: Sentiment
 =======================
 
-[![Release](https://jitpack.io/v/denzilferreira/com.aware.plugin.sentimental.svg)](https://jitpack.io/#denzilferreira/com.aware.plugin.sentimental)
+[![Release](https://jitpack.io/v/denzilferreira/com.aware.plugin.sentiment.svg)](https://github.com/wwbp/com.aware.plugin.sentiment)
 
 This plugin performs lexical analysis on user input text.
 
@@ -18,8 +18,8 @@ Please see the compilation and apk construction instructions there.
 # Settings
 
 Parameters adjustable on the dashboard and client:
-- **status_plugin_sentimental**: (boolean) activate/deactivate plugin
-- **plugin_sentimental_packages**: (String) com.whatsapp, com.google.android.apps.messaging, ... If left empty, the plugin will be used in any app that accepts text input
+- **status_plugin_sentiment**: (boolean) activate/deactivate plugin
+- **plugin_sentiment_packages**: (String) com.whatsapp, com.google.android.apps.messaging, ... If left empty, the plugin will be used in any app that accepts text input
 
 # Default Lexica
 

@@ -56,7 +56,7 @@ open class Plugin : Aware_Plugin() {
     override fun onCreate() {
         Log.i("ABTest", "This is echoed on create");
         super.onCreate()
-        TAG = "AWARE: Sentimental"
+        TAG = "AWARE: Sentiment"
 
         val usingInput = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         installedKeyboards = usingInput.enabledInputMethodList.toString()
@@ -162,16 +162,16 @@ open class Plugin : Aware_Plugin() {
                             val testHash = Sentiment.getScoreFromInput(interstring2);
 
                             val contentValues = ContentValues()
-                            contentValues.put(Provider.Sentimental_Data.TIMESTAMP, System.currentTimeMillis())
-                            contentValues.put(Provider.Sentimental_Data.DEVICE_ID, Aware.getSetting(applicationContext, Aware_Preferences.DEVICE_ID))
-                            contentValues.put(Provider.Sentimental_Data.APP_NAME, keyboardInApp)
+                            contentValues.put(Provider.Sentiment_Data.TIMESTAMP, System.currentTimeMillis())
+                            contentValues.put(Provider.Sentiment_Data.DEVICE_ID, Aware.getSetting(applicationContext, Aware_Preferences.DEVICE_ID))
+                            contentValues.put(Provider.Sentiment_Data.APP_NAME, keyboardInApp)
 
                             for ((category, score) in testHash) {
-                                contentValues.put(Provider.Sentimental_Data.WORD_CATEGORY, category as String)
-                                contentValues.put(Provider.Sentimental_Data.SENTIMENT_SCORE, score as Double)
+                                contentValues.put(Provider.Sentiment_Data.WORD_CATEGORY, category as String)
+                                contentValues.put(Provider.Sentiment_Data.SENTIMENT_SCORE, score as Double)
                                 //save data only if score for category >0
                                 if (score > 0.0) {
-                                    contentResolver.insert(Provider.Sentimental_Data.CONTENT_URI, contentValues) //does the actual data insert
+                                    contentResolver.insert(Provider.Sentiment_Data.CONTENT_URI, contentValues) //does the actual data insert
 
                                     Log.i("ABTest", "Inserted into database: $contentValues")
                                 }
