@@ -26,7 +26,7 @@ public class Sentiment_Sync extends Service {
                 sSyncAdapter.init(
                         Provider.DATABASE_TABLES, Provider.TABLES_FIELDS,
                         new Uri[]{
-                                Provider.Sentimental_Data.CONTENT_URI
+                                Provider.Sentiment_Data.CONTENT_URI
                         }
                 );
             }

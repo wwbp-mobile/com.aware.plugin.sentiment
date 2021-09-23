@@ -27,8 +27,8 @@ public class Provider extends ContentProvider {
      */
     public static String AUTHORITY = "com.aware.plugin.sentiment.provider.sentiment";
 
-    private static final int SENTIMENTAL = 1;
-    private static final int SENTIMENTAL_ID = 2;
+    private static final int SENTIMENT = 1;
+    private static final int SENTIMENT_ID = 2;
 
     public static final String DATABASE_NAME = "plugin_sentiment.db";
 
@@ -37,16 +37,16 @@ public class Provider extends ContentProvider {
     };
 
     public static final String[] TABLES_FIELDS = {
-            Sentimental_Data._ID + " integer primary key autoincrement," +
-                    Sentimental_Data.TIMESTAMP + " real default 0," +
-                    Sentimental_Data.DEVICE_ID + " text default ''," +
-                    Sentimental_Data.APP_NAME + " text default ''," +
-                    Sentimental_Data.WORD_CATEGORY + " text default ''," +
-                    Sentimental_Data.SENTIMENT_SCORE + " real default 0"
+            Sentiment_Data._ID + " integer primary key autoincrement," +
+                    Sentiment_Data.TIMESTAMP + " real default 0," +
+                    Sentiment_Data.DEVICE_ID + " text default ''," +
+                    Sentiment_Data.APP_NAME + " text default ''," +
+                    Sentiment_Data.WORD_CATEGORY + " text default ''," +
+                    Sentiment_Data.SENTIMENT_SCORE + " real default 0"
     };
 
-    public static final class Sentimental_Data implements BaseColumns {
-        private Sentimental_Data() {
+    public static final class Sentiment_Data implements BaseColumns {
+        private Sentiment_Data() {
         }
 
         ;
@@ -81,16 +81,16 @@ public class Provider extends ContentProvider {
         AUTHORITY = getContext().getPackageName() + ".provider.sentiment";
 
         URIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        URIMatcher.addURI(AUTHORITY, DATABASE_TABLES[0], SENTIMENTAL);
-        URIMatcher.addURI(AUTHORITY, DATABASE_TABLES[0] + "/#", SENTIMENTAL_ID);
+        URIMatcher.addURI(AUTHORITY, DATABASE_TABLES[0], SENTIMENT);
+        URIMatcher.addURI(AUTHORITY, DATABASE_TABLES[0] + "/#", SENTIMENT_ID);
 
         databaseMap = new HashMap<>();
-        databaseMap.put(Sentimental_Data._ID, Sentimental_Data._ID);
-        databaseMap.put(Sentimental_Data.TIMESTAMP, Sentimental_Data.TIMESTAMP);
-        databaseMap.put(Sentimental_Data.DEVICE_ID, Sentimental_Data.DEVICE_ID);
-        databaseMap.put(Sentimental_Data.APP_NAME, Sentimental_Data.APP_NAME);
-        databaseMap.put(Sentimental_Data.WORD_CATEGORY, Sentimental_Data.WORD_CATEGORY);
-        databaseMap.put(Sentimental_Data.SENTIMENT_SCORE, Sentimental_Data.SENTIMENT_SCORE);
+        databaseMap.put(Sentiment_Data._ID, Sentiment_Data._ID);
+        databaseMap.put(Sentiment_Data.TIMESTAMP, Sentiment_Data.TIMESTAMP);
+        databaseMap.put(Sentiment_Data.DEVICE_ID, Sentiment_Data.DEVICE_ID);
+        databaseMap.put(Sentiment_Data.APP_NAME, Sentiment_Data.APP_NAME);
+        databaseMap.put(Sentiment_Data.WORD_CATEGORY, Sentiment_Data.WORD_CATEGORY);
+        databaseMap.put(Sentiment_Data.SENTIMENT_SCORE, Sentiment_Data.SENTIMENT_SCORE);
 
         return true;
     }
@@ -113,7 +113,7 @@ public class Provider extends ContentProvider {
 
         int count;
         switch (URIMatcher.match(uri)) {
-            case SENTIMENTAL:
+            case SENTIMENT:
                 count = database.delete(DATABASE_TABLES[0], selection, selectionArgs);
                 break;
             default:
@@ -131,10 +131,10 @@ public class Provider extends ContentProvider {
     @Override
     public String getType(Uri uri) {
         switch (URIMatcher.match(uri)) {
-            case SENTIMENTAL:
-                return Sentimental_Data.CONTENT_TYPE;
-            case SENTIMENTAL_ID:
-                return Sentimental_Data.CONTENT_ITEM_TYPE;
+            case SENTIMENT:
+                return Sentiment_Data.CONTENT_TYPE;
+            case SENTIMENT_ID:
+                return Sentiment_Data.CONTENT_ITEM_TYPE;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
@@ -150,12 +150,12 @@ public class Provider extends ContentProvider {
         database.beginTransaction();
 
         switch (URIMatcher.match(uri)) {
-            case SENTIMENTAL:
-                long weather_id = database.insertWithOnConflict(DATABASE_TABLES[0], Sentimental_Data.DEVICE_ID, values, SQLiteDatabase.CONFLICT_IGNORE);
+            case SENTIMENT:
+                long weather_id = database.insertWithOnConflict(DATABASE_TABLES[0], Sentiment_Data.DEVICE_ID, values, SQLiteDatabase.CONFLICT_IGNORE);
 
                 if (weather_id > 0) {
                     Uri new_uri = ContentUris.withAppendedId(
-                            Sentimental_Data.CONTENT_URI,
+                            Sentiment_Data.CONTENT_URI,
                             weather_id);
                     getContext().getContentResolver().notifyChange(new_uri, null, false);
                     database.setTransactionSuccessful();
@@ -177,7 +177,7 @@ public class Provider extends ContentProvider {
 
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         switch (URIMatcher.match(uri)) {
-            case SENTIMENTAL:
+            case SENTIMENT:
                 qb.setTables(DATABASE_TABLES[0]);
                 qb.setProjectionMap(databaseMap);
                 break;
@@ -206,7 +206,7 @@ public class Provider extends ContentProvider {
 
         int count;
         switch (URIMatcher.match(uri)) {
-            case SENTIMENTAL:
+            case SENTIMENT:
                 count = database.update(DATABASE_TABLES[0], values, selection,
                         selectionArgs);
                 break;
