@@ -19,6 +19,7 @@ class Settings : AppCompatPreferenceActivity(), SharedPreferences.OnSharedPrefer
     lateinit var status : CheckBoxPreference
     lateinit var packages : EditTextPreference
 
+    @Deprecated("Deprecated in Java")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         addPreferencesFromResource(R.xml.preferences_sentiment)
